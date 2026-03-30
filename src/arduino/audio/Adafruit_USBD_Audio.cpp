@@ -77,8 +77,8 @@ bool Adafruit_USBD_Audio::begin(unsigned long rate, int channels,
   this->_channels = channels;
 
   if (_stridx == 0) {
-    #ifdef CFG_TUD_AUDIO_NAME 
-  _   _stridx = TinyUSBDevice.addStringDescriptor(CFG_TUD_AUDIO_NAME);
+    #ifdef CFG_TUD_AUDIO_NAME_TITLE_TITLE 
+    _stridx = TinyUSBDevice.addStringDescriptor(CFG_TUD_AUDIO_NAME_TITLE_TITLE);
     #else
       _stridx = TinyUSBDevice.addStringDescriptor("USB DAC");
     #endif
