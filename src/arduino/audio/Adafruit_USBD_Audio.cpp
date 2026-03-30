@@ -30,8 +30,10 @@ Adafruit_USBD_Audio *self_Adafruit_USBD_Audio = nullptr;
 
 /*------------- MAIN -------------*/
 bool Adafruit_USBD_Audio::begin(unsigned long rate, int channels,
-                                int bitsPerSample) {
+                                int bitsPerSample, const char* name) {
   _itf_number_total = 0;
+
+  _name = name;
 
   if (!_cdc_active) {
     TinyUSBDevice.clearConfiguration();
@@ -77,11 +79,7 @@ bool Adafruit_USBD_Audio::begin(unsigned long rate, int channels,
   this->_channels = channels;
 
   if (_stridx == 0) {
-    #ifdef CFG_TUD_AUDIO_NAME_TITLE_TITLE 
-    _stridx = TinyUSBDevice.addStringDescriptor(CFG_TUD_AUDIO_NAME_TITLE_TITLE);
-    #else
-      _stridx = TinyUSBDevice.addStringDescriptor("USB DAC");
-    #endif
+      _stridx = TinyUSBDevice.addStringDescriptor(_name);
   }
 
   // calculate descriptor length;

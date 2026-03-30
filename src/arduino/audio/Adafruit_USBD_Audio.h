@@ -99,7 +99,7 @@ class Adafruit_USBD_Audio : public Adafruit_USBD_Interface {
 
   /// start the processing
   virtual bool begin(unsigned long rate = 44100, int channels = 2,
-                     int bitsPerSample = 16);
+                     int bitsPerSample = 16, const char* name = "DSP");
 
   // end audio
   virtual void end(void);
@@ -111,6 +111,9 @@ class Adafruit_USBD_Audio : public Adafruit_USBD_Interface {
   }
 
   operator bool() { return active(); }
+
+  // name of device
+  const char* _name;
 
   // get sample rate
   uint32_t rate() { return _sample_rate; }
