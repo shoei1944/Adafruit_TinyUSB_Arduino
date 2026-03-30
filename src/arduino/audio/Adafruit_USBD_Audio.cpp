@@ -77,7 +77,11 @@ bool Adafruit_USBD_Audio::begin(unsigned long rate, int channels,
   this->_channels = channels;
 
   if (_stridx == 0) {
-  _stridx = TinyUSBDevice.addStringDescriptor("TinyUSB Audio");
+    #ifdef CFG_TUD_AUDIO_NAME 
+  _   _stridx = TinyUSBDevice.addStringDescriptor(CFG_TUD_AUDIO_NAME);
+    #else
+      _stridx = TinyUSBDevice.addStringDescriptor("USB DAC");
+    #endif
   }
 
   // calculate descriptor length;
